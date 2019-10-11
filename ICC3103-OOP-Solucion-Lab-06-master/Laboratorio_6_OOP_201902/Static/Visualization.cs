@@ -99,6 +99,24 @@ namespace Laboratorio_6_OOP_201902.Static
             Console.Clear();
         }
 
+        public static void ShowBoard(Board board, int player, int[] lifePoints, int[] attackPoints)
+        {
+            
+            Console.WriteLine("Board: \n");
+            Console.WriteLine("Opponent - LifePoints: " + lifePoints[player] + " - AttackPoints: " + attackPoints[player]);
+            Console.WriteLine("(longRange) ");
+            Console.WriteLine("(range) ");
+            Console.WriteLine("(melee) ");
+
+            Console.WriteLine("Weather Cards: ");
+
+            Console.WriteLine("Board: \n");
+            Console.WriteLine("You - LifePoints: " + lifePoints[player] + " - AttackPoints: " + attackPoints[player]);
+            Console.WriteLine("(longRange) ");
+            Console.WriteLine("(range) ");
+            Console.WriteLine("(melee) ");
+        }
+
     }
     
 }
