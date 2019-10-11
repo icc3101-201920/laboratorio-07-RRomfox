@@ -179,27 +179,27 @@ namespace Laboratorio_6_OOP_201902
 
         public int[] GetAttackPoints(EnumType line = EnumType.None)
         {
-            int[] totalAttack = new int[] { 0, 0 };
+            int[] totalAttack = new int[2] {Id, 0};
 
             if (Board.PlayerCards[Id].ContainsKey(EnumType.melee))
             {
                 foreach (CombatCard card in Board.PlayerCards[Id][EnumType.melee])
                 {
-                    totalAttack[0] += card.AttackPoints;
+                    totalAttack[1] += card.AttackPoints;
                 }
             }
             if (Board.PlayerCards[Id].ContainsKey(EnumType.range))
             {
                 foreach (CombatCard card in Board.PlayerCards[Id][EnumType.range])
                 {
-                    totalAttack[0] += card.AttackPoints;
+                    totalAttack[1] += card.AttackPoints;
                 }
             }
             if (Board.PlayerCards[Id].ContainsKey(EnumType.melee))
             {
                 foreach (CombatCard card in Board.PlayerCards[Id][EnumType.longRange])
                 {
-                    totalAttack[0] += card.AttackPoints;
+                    totalAttack[1] += card.AttackPoints;
                 }
             }
             return totalAttack;

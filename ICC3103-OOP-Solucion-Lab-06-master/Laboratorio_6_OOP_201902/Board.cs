@@ -119,7 +119,7 @@ namespace Laboratorio_6_OOP_201902
 
         public int[] GetAttackPoints(EnumType line = EnumType.None)
         {
-            int[] totalAttack = new int[] { 0, 0 };
+            int[] totalAttack = new int[2] { 0, 0 };
             for (int i = 0; i < 2; i++)
             {
                 if (playerCards[i].ContainsKey(line))

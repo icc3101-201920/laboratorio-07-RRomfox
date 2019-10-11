@@ -36,7 +36,6 @@ namespace Laboratorio_6_OOP_201902
             //Add board to players
             players[0].Board = boardGame;
             players[1].Board = boardGame;
-            turn = 0;
         }
         //Propiedades
         public Player[] Players
@@ -155,11 +154,55 @@ namespace Laboratorio_6_OOP_201902
                         }
                     }
                     firstOrSecondUser = ActivePlayer.Id == 0 ? 1 : 0;
+                    Visualization.ClearConsole();
                 }
                 turn += 1;
             }
+            while (CheckIfEndGame() == false)
+            {
+                int[] lifePoints = new int[2] {players[0].LifePoints, players[1].LifePoints};
+                int[] attackPoints = new int[2] { players[0].GetAttackPoints()[1], players[1].GetAttackPoints()[1]};
 
-            
+                Visualization.ShowBoard(boardGame, firstOrSecondUser, lifePoints, attackPoints);
+
+                Console.WriteLine("\nPress any key to continue");
+                Console.ReadKey();
+                Visualization.ClearConsole();
+
+                Console.WriteLine($"PLayer [{firstOrSecondUser}], press any key to draw a card");
+                Console.ReadKey();
+
+                ActivePlayer.Deck.Shuffle();
+                players[firstOrSecondUser].DrawCard(0);
+                Visualization.ShowHand(ActivePlayer.Hand);
+                Visualization.ShowListOptions(new List<string>() { "Play Card", "Pass" }, "Make your move player: " + firstOrSecondUser);
+                userInput = Visualization.GetUserInput(1);
+
+
+                int rw = GetRoundWinner();
+                if (rw == 0)
+                {
+                    Console.WriteLine("Its a tie");
+                }
+                else
+                {
+                    Console.WriteLine(rw + " wins the round.");
+                }
+                
+            }
+
+            Visualization.ClearConsole();
+            int win = GetWinner();
+            if (win == 0)
+            {
+                Console.WriteLine("Its a tie!");
+            }
+            else
+            {
+                Console.WriteLine(win + " wins the round.");
+            }
+
+
         }
         public void AddDecks()
         {
@@ -216,11 +259,11 @@ namespace Laboratorio_6_OOP_201902
 
         public int GetRoundWinner()
         {
-            if (players[0].LifePoints == 0 && players[1].LifePoints > 0)
+            if (players[0].AttackPoints < players[1].AttackPoints)
             {
                 return 1;
             }
-            else if (players[1].LifePoints == 0 && players[0].LifePoints > 0)
+            else if (players[0].AttackPoints > players[1].AttackPoints)
             {
                 return 0;
             }

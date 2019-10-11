@@ -101,20 +101,84 @@ namespace Laboratorio_6_OOP_201902.Static
 
         public static void ShowBoard(Board board, int player, int[] lifePoints, int[] attackPoints)
         {
+
+            int[] totalAttackLR = board.GetAttackPoints(EnumType.longRange);
+            int[] totalAttackR = board.GetAttackPoints(EnumType.range);
+            int[] totalAttackM = board.GetAttackPoints(EnumType.melee);
+
+
+            Console.WriteLine("Board: \n");
+            Console.WriteLine($"Opponent - LifePoints: {lifePoints[Math.Abs(player - 1)]} - AttackPoints: { attackPoints[Math.Abs(player - 1)]}");
+
+            Console.Write($"(longRange) [{totalAttackLR[Math.Abs(player - 1)]}]: ");
+            if (board.PlayerCards[Math.Abs(player - 1)].ContainsKey(EnumType.longRange))
+            {
+                foreach (CombatCard card in board.PlayerCards[Math.Abs(player - 1)][EnumType.longRange])
+                {
+                    Console.Write($"|{card.AttackPoints}|");
+                }
+            }
+
+            Console.Write($"\n(range) [{totalAttackR[Math.Abs(player - 1)]}]: ");
+            if (board.PlayerCards[Math.Abs(player - 1)].ContainsKey(EnumType.range))
+            {
+                foreach (CombatCard card in board.PlayerCards[Math.Abs(player - 1)][EnumType.range])
+                {
+                    Console.Write($"|{card.AttackPoints}|");
+                }
+            }
+
+            Console.Write($"\n(melee) [{totalAttackM[Math.Abs(player - 1)]}]: ");
+            if (board.PlayerCards[Math.Abs(player - 1)].ContainsKey(EnumType.melee))
+            {
+                foreach (CombatCard card in board.PlayerCards[Math.Abs(player - 1)][EnumType.melee])
+                {
+                    Console.Write($"|{card.AttackPoints}|");
+                }
+            }
+            Console.WriteLine("");
+
+            Console.Write("\nWeather Cards: ");
+            if (board.WeatherCards.Count > 0)
+            {
+                foreach (SpecialCard card in board.WeatherCards)
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write($"|{card.Name}|");
+                    Console.ResetColor();
+                }
+            }
+            Console.WriteLine("");
+
+            Console.WriteLine($"\nYou - LifePoints: {lifePoints[player]} - AttackPoints: {attackPoints[player]}");
+
+            Console.Write($"(longRange) [{totalAttackLR[player]}]: ");
+            if (board.PlayerCards[player].ContainsKey(EnumType.longRange))
+            {
+                foreach (CombatCard card in board.PlayerCards[player][EnumType.longRange])
+                {
+                    Console.Write($"|{card.AttackPoints}|");
+                }
+            }
             
-            Console.WriteLine("Board: \n");
-            Console.WriteLine("Opponent - LifePoints: " + lifePoints[player] + " - AttackPoints: " + attackPoints[player]);
-            Console.WriteLine("(longRange) ");
-            Console.WriteLine("(range) ");
-            Console.WriteLine("(melee) ");
-
-            Console.WriteLine("Weather Cards: ");
-
-            Console.WriteLine("Board: \n");
-            Console.WriteLine("You - LifePoints: " + lifePoints[player] + " - AttackPoints: " + attackPoints[player]);
-            Console.WriteLine("(longRange) ");
-            Console.WriteLine("(range) ");
-            Console.WriteLine("(melee) ");
+            Console.Write($"\n(range) [{totalAttackR[player]}]: ");
+            if (board.PlayerCards[player].ContainsKey(EnumType.range))
+            {
+                foreach (CombatCard card in board.PlayerCards[player][EnumType.range])
+                {
+                    Console.Write($"|{card.AttackPoints}|");
+                }
+            }
+            
+            Console.Write($"\n(melee) [{totalAttackM[player]}]: ");
+            if (board.PlayerCards[player].ContainsKey(EnumType.melee))
+            {
+                foreach (CombatCard card in board.PlayerCards[player][EnumType.melee])
+                {
+                    Console.Write($"|{card.AttackPoints}|");
+                }
+            }
+            Console.WriteLine("");
         }
 
     }
